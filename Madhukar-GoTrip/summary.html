@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your GoTrip booking has been confirmed. View your booking summary and details." />
+    <title>Booking Summary | GoTrip</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/book.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #eef1f5);
+        }
+
+        @media print {
+
+            nav,
+            footer,
+            .confirm-actions,
+            .back-top {
+                display: none !important;
+            }
+
+            body {
+                background: #fff !important;
+            }
+
+            .confirm-card {
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="container">
+            <a class="nav-logo" href="index.html">Go Trip</a>
+            <button class="hamburger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="book.html">Book</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== Summary Page (US#8) ===== -->
+    <div class="confirm-wrap" id="summaryPage">
+
+        <div class="confirm-card">
+
+            <!-- Header with confirmation -->
+            <div class="confirm-header">
+                <div class="check-icon"><i class="fas fa-check"></i></div>
+                <h2>Booking Confirmed!</h2>
+                <p>Thank you for choosing GoTrip. Your trip is all set.</p>
+                <span class="confirm-ref" id="refTag">Ref # —</span>
+            </div>
+
+            <!-- Body: booking details -->
+            <div class="confirm-body">
+
+                <h3>Traveller Details</h3>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="d-label">Full Name</div>
+                        <div class="d-val" id="sName">—</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="d-label">Email</div>
+                        <div class="d-val" id="sEmail">—</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="d-label">Phone</div>
+                        <div class="d-val" id="sPhone">—</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="d-label">Booking Reference</div>
+                        <div class="d-val" id="sRef">—</div>
+                    </div>
+                </div>
+
+                <h3>Trip Details</h3>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="d-label">Destination</div>
+                        <div class="d-val" id="sDest">—</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="d-label">Travel Date</div>
+                        <div class="d-val" id="sDate">—</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="d-label">Travellers</div>
+                        <div class="d-val" id="sTravelers">—</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="d-label">Room Type</div>
+                        <div class="d-val" id="sRoom">—</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="d-label">Payment Method</div>
+                        <div class="d-val" id="sPayment">—</div>
+                    </div>
+                </div>
+
+                <!-- Total -->
+                <div class="confirm-total">
+                    <span class="tot-label">Total Paid</span>
+                    <span class="tot-val" id="sTotal">—</span>
+                </div>
+
+                <!-- Action buttons -->
+                <div class="confirm-actions">
+                    <button class="btn-print" id="btnPrint">
+                        <i class="fas fa-print"></i> Print / Save PDF
+                    </button>
+                    <button class="btn-back" id="btnBack">
+                        <i class="fas fa-home"></i> Book Another Trip
+                    </button>
+                </div>
+
+            </div>
+        </div><!-- /.confirm-card -->
+
+        <!-- Alert if no booking data found -->
+        <div id="noDataAlert" style="display:none; text-align:center; padding:40px; color:#888;">
+            <i class="fas fa-info-circle" style="font-size:2.5rem; color:#ddd; margin-bottom:14px; display:block;"></i>
+            <p>No booking data found. Please <a href="book.html" style="color:#ff5f6d; font-weight:700;">fill out the
+                    booking form</a> first.</p>
+        </div>
+
+    </div><!-- /.confirm-wrap -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Go Trip</h4>
+                <p>Thank you for booking with GoTrip. We look forward to making your journey memorable.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="book.html">Book Again</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <p><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
+                <p style="margin-top:8px"><i class="fas fa-envelope"></i> info@gotrip.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GoTrip. All rights reserved. </p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-top" id="backTop"><i class="fas fa-chevron-up"></i></a>
+
+    <script src="js/book.js"></script>
+    <script>
+        // Show no-data alert if bookingData is missing
+        if (!sessionStorage.getItem('bookingData')) {
+            document.getElementById('noDataAlert').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

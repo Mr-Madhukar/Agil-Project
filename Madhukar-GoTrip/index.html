@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Go Trip – Your trusted travel partner for unforgettable journeys worldwide." />
+    <meta name="keywords" content="travel, tourism, vacation, holiday packages, destinations, travel agency" />
+
+    <title>Go Trip | Discover Your Dream Destination</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/index.css" />
+
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Satisfy&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- ===== Navigation Bar ===== -->
+    <nav class="nav-bar">
+        <div class="container">
+            <a class="nav-logo" href="index.html">Go Trip</a>
+            <button class="hamburger" id="burger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="packages.html"><i class="fas fa-suitcase"></i> Packages</a></li>
+                <li><a href="book.html"><i class="fas fa-plane"></i> Book a Trip</a></li>
+                <li><a href="signup.html"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== Banner / Hero Section ===== -->
+    <header class="banner" id="home">
+        <div class="animated-bg"></div>
+        <div class="overlay"></div>
+
+        <div class="banner-text-item" data-aos="fade-up">
+            <div class="banner-heading">
+                <h1><span class="highlight-text">Explore</span> The World!</h1>
+                <p class="banner-subtitle">Discover amazing destinations and create unforgettable memories</p>
+            </div>
+
+            <!-- Search Form -->
+            <form class="form" id="bookingForm">
+                <div class="search-container">
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" list="mylist" id="destination" placeholder="Where would you like to go?"
+                            required autocomplete="off" />
+                        <datalist id="mylist">
+                            <option value="Paris, France"></option>
+                            <option value="Tokyo, Japan"></option>
+                            <option value="Bern, Switzerland"></option>
+                            <option value="Vancouver, Canada"></option>
+                            <option value="Seoul, South Korea"></option>
+                            <option value="Monaco, Monaco"></option>
+                        </datalist>
+                    </div>
+                    <div class="input-group date-input-group">
+                        <i class="far fa-calendar-alt"></i>
+                        <input type="date" class="date" id="date" placeholder="Select date" required />
+                    </div>
+                    <button class="book" type="submit">
+                        <i class="fas fa-search"></i> Explore Now
+                    </button>
+                </div>
+            </form>
+
+            <!-- Banner bottom features -->
+            <div class="banner-features">
+                <div class="feature"><i class="fas fa-globe"></i><span>100+ Destinations</span></div>
+                <div class="feature"><i class="fas fa-plane"></i><span>Best Prices</span></div>
+                <div class="feature"><i class="fas fa-headset"></i><span>24/7 Support</span></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== Services / Why Choose Us ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="mini-title">Why Choose Us</h2>
+            </div>
+            <div class="attractive-services" data-aos="fade-up">
+                <div class="attractive-service" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-circle"><i class="fas fa-users"></i></div>
+                    <span>1000+ Guides</span>
+                </div>
+                <div class="attractive-service" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-circle"><i class="fas fa-certificate"></i></div>
+                    <span>Trusted Agency</span>
+                </div>
+                <div class="attractive-service" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="service-circle"><i class="fas fa-route"></i></div>
+                    <span>28+ Years</span>
+                </div>
+                <div class="attractive-service" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="service-circle"><i class="fas fa-smile"></i></div>
+                    <span>98% Happy Travelers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Popular Destinations Section ===== -->
+    <section class="places" id="places">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-subtitle">Popular Destinations</span>
+                <h2 class="section-title">Explore Top Destinations</h2>
+                <p class="section-description">Discover amazing places around the world with our exclusive travel
+                    packages</p>
+            </div>
+
+            <div class="cards" data-aos="fade-up" data-aos-delay="200">
+
+                <!-- Canada -->
+                <div class="card">
+                    <div class="card-tag">Popular</div>
+                    <div class="zoom-img">
+                        <div class="img-card">
+                            <a href="packages.html?package=canadian-rockies">
+                                <img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80"
+                                    alt="Vancouver, Canada" loading="lazy" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <div class="card-header">
+                            <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+                            <h2>Canada</h2>
+                        </div>
+                        <p class="cost">₹ 1,99,999.00 / Per Person / $2382</p>
+                        <div class="card-box">
+                            <p class="time"><i class="far fa-clock"></i>5 Days</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i>Canada</p>
+                        </div>
+                        <a href="book.html?package=canadian-rockies" class="view-details">View Details <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Paris -->
+                <div class="card">
+                    <div class="zoom-img">
+                        <div class="img-card">
+                            <a href="packages.html?package=paris-escapade">
+                                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80"
+                                    alt="Paris, France" loading="lazy" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <div class="card-header">
+                            <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+                            <h2>Paris</h2>
+                        </div>
+                        <p class="cost">₹ 1,49,999.00 / Per Person / $1786</p>
+                        <div class="card-box">
+                            <p class="time"><i class="far fa-clock"></i>4 Days</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i>Paris</p>
+                        </div>
+                        <a href="book.html?package=paris-escapade" class="view-details">View Details <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Monaco -->
+                <div class="card">
+                    <div class="card-tag">Best Offer</div>
+                    <div class="zoom-img">
+                        <div class="img-card">
+                            <a href="packages.html?package=monaco-luxury">
+                                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                                    alt="Monaco" loading="lazy" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <div class="card-header">
+                            <span class="rating"><i class="fas fa-star"></i> 4.7</span>
+                            <h2>Monaco</h2>
+                        </div>
+                        <p class="cost">₹ 1,39,999.00 / Per Person / $1667</p>
+                        <div class="card-box">
+                            <p class="time"><i class="far fa-clock"></i>4 Days</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i>Monaco</p>
+                        </div>
+                        <a href="book.html?package=monaco-luxury" class="view-details">View Details <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Switzerland -->
+                <div class="card">
+                    <div class="zoom-img">
+                        <div class="img-card">
+                            <a href="packages.html?package=swiss-adventure">
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
+                                    alt="Switzerland" loading="lazy" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <div class="card-header">
+                            <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+                            <h2>Switzerland</h2>
+                        </div>
+                        <p class="cost">₹ 1,59,999.00 / Per Person / $1906</p>
+                        <div class="card-box">
+                            <p class="time"><i class="far fa-clock"></i>5 Days</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i>Switzerland</p>
+                        </div>
+                        <a href="book.html?package=swiss-adventure" class="view-details">View Details <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Korea -->
+                <div class="card">
+                    <div class="zoom-img">
+                        <div class="img-card">
+                            <a href="packages.html?package=korea-adventure">
+                                <img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=600&q=80"
+                                    alt="South Korea" loading="lazy" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <div class="card-header">
+                            <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+                            <h2>Korea</h2>
+                        </div>
+                        <p class="cost">₹ 1,49,999.00 / Per Person / $1787</p>
+                        <div class="card-box">
+                            <p class="time"><i class="far fa-clock"></i>4 Days</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i>Korea</p>
+                        </div>
+                        <a href="book.html?package=korea-adventure" class="view-details">View Details <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Tokyo -->
+                <div class="card">
+                    <div class="card-tag">Hot Deal</div>
+                    <div class="zoom-img">
+                        <div class="img-card">
+                            <a href="packages.html?package=tokyo-explorer">
+                                <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80"
+                                    alt="Tokyo, Japan" loading="lazy" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <div class="card-header">
+                            <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+                            <h2>Tokyo</h2>
+                        </div>
+                        <p class="cost">₹ 1,69,999.00 / Per Person / $2024</p>
+                        <div class="card-box">
+                            <p class="time"><i class="far fa-clock"></i>5 Days</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i>Tokyo</p>
+                        </div>
+                        <a href="book.html?package=tokyo-explorer" class="view-details">View Details <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div><!-- /.cards -->
+
+            <div class="view-all-container" data-aos="fade-up">
+                <a href="packages.html" class="view-all-btn">View All Destinations <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== About Section ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-wrapper" data-aos="fade-up">
+
+                <!-- Left: image -->
+                <div class="about-img" data-aos="fade-right" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80"
+                        alt="Mountain view representing Go Trip's adventure tours" loading="lazy" />
+                    <div class="experience-badge">
+                        <span class="number">28</span>
+                        <span class="text">YEARS OF<br>EXPERIENCE</span>
+                    </div>
+                </div>
+
+                <!-- Right: text -->
+                <div class="about-text" data-aos="fade-left" data-aos-delay="100">
+                    <span class="section-subtitle">ABOUT OUR COMPANY</span>
+                    <h2 class="section-title">We Are <span class="highlight-text">Go Trip</span>: Your Trusted Travel
+                        Partner</h2>
+                    <p class="about-description">
+                        At Go Trip, we believe that travel is more than just visiting new places — it's about creating
+                        unforgettable
+                        experiences and lifelong memories. With over 28 years of experience in the travel industry, we
+                        have mastered
+                        the art of crafting personalised and unique travel journeys that cater to the diverse interests
+                        and preferences
+                        of our clients.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="feature-icon"><i class="fas fa-route"></i></div>
+                            <div class="feature-text">
+                                <h4>Personalised Planning</h4>
+                                <p>Custom itineraries designed just for you</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="feature-icon"><i class="fas fa-user-friends"></i></div>
+                            <div class="feature-text">
+                                <h4>Expert Local Guides</h4>
+                                <p>Deep knowledge of destinations</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                            <div class="feature-text">
+                                <h4>Sustainable Tourism</h4>
+                                <p>Eco-friendly travel options</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                            <div class="feature-text">
+                                <h4>24/7 Support</h4>
+                                <p>Always there when you need us</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-buttons">
+                        <a href="packages.html" class="btn-primary-about">Explore Packages</a>
+                        <a href="signup.html" class="btn-primary-about"
+                            style="background:transparent; border:2px solid #ff5f6d; color:#ff5f6d; margin-left:0;">
+                            Join Us Free
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Testimonials Section ===== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-subtitle">Testimonials</span>
+                <h2 class="section-title">What Our Travelers Say</h2>
+            </div>
+
+            <div class="testimonials-slider" data-aos="fade-up" data-aos-delay="200">
+
+                <div class="testimonial-item">
+                    <div class="testimonial-img">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Abhishek Kumar" loading="lazy" />
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"Our trip to Switzerland was flawlessly planned. The local guides were knowledgeable and the
+                            accommodations were superb. Can't wait to book my next adventure with Go Trip!"</p>
+                        <div class="testimonial-info">
+                            <h4>Lucky</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Go Trip</h4>
+                <p>Your trusted travel partner since 1996 — crafting unforgettable journeys across the globe.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="book.html">Book a Trip</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> MMDU </p>
+                <p style="margin-top:8px"><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
+                <p style="margin-top:8px"><i class="fas fa-envelope"></i> info@gotrip.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GoTrip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#home" class="back-top" id="backTop"><i class="fas fa-chevron-up"></i></a>
+
+    <script>
+        // AOS init
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+
+        // Mobile menu toggle
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            burger.classList.toggle('open');
+        });
+
+        // Set minimum date to today
+        const dateInput = document.getElementById('date');
+        const today = new Date();
+        const y = today.getFullYear();
+        const m = String(today.getMonth() + 1).padStart(2, '0');
+        const d = String(today.getDate()).padStart(2, '0');
+        dateInput.setAttribute('min', `${y}-${m}-${d}`);
+
+        // Search form → go to booking page
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const dest = document.getElementById('destination').value;
+            const date = document.getElementById('date').value;
+            window.location.href = `book.html?destination=${encodeURIComponent(dest)}&date=${encodeURIComponent(date)}`;
+        });
+
+        // Back to top
+        const backTop = document.getElementById('backTop');
+        window.addEventListener('scroll', () => {
+            backTop.classList.toggle('show', window.scrollY > 300);
+        });
+    </script>
+</body>
+
+</html>

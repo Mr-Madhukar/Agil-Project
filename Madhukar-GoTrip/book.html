@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Book your dream vacation with GoTrip – fill in your travel details and confirm your booking." />
+    <title>Book Your Trip | GoTrip</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/book.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="container">
+            <a class="nav-logo" href="index.html">Go Trip</a>
+            <button class="hamburger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="book.html" class="active">Book</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="booking-hero">
+        <small>Booking Form</small>
+        <h1>Complete Your Booking</h1>
+        <p>Fill in the details below to secure your dream vacation</p>
+    </div>
+
+    <!-- ===== Booking Layout ===== -->
+    <div class="booking-layout">
+
+        <!-- LEFT: Booking Form (US#7) -->
+        <div class="form-card">
+            <h2><i class="fas fa-clipboard-list"></i> Passenger & Trip Details</h2>
+
+            <form id="bookingForm" novalidate>
+
+                <!-- Traveller Information -->
+                <div class="form-section-title">Traveller Information</div>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" placeholder="Enter your full name" required
+                            autocomplete="name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" placeholder="you@example.com" required autocomplete="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" required autocomplete="tel" />
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination <span class="required">*</span></label>
+                        <select id="destination" required>
+                            <option value="">— Select Destination —</option>
+                            <option value="Paris, France">Paris, France</option>
+                            <option value="Tokyo, Japan">Tokyo, Japan</option>
+                            <option value="Bern, Switzerland">Bern, Switzerland</option>
+                            <option value="Vancouver, Canada">Vancouver, Canada</option>
+                            <option value="Seoul, South Korea">Seoul, South Korea</option>
+                            <option value="Monaco, Monaco">Monaco, Monaco</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Trip Details -->
+                <div class="form-section-title">Trip Details</div>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="travelDate">Travel Date <span class="required">*</span></label>
+                        <input type="date" id="travelDate" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="travelers">Number of Travellers <span class="required">*</span></label>
+                        <input type="number" id="travelers" min="1" max="20" value="1" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="roomType">Room Type <span class="required">*</span></label>
+                        <select id="roomType" required>
+                            <option value="standard">Standard</option>
+                            <option value="deluxe">Deluxe (+₹15,000)</option>
+                            <option value="suite">Suite (+₹30,000)</option>
+                            <option value="family">Family Room (+₹20,000)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Add-on Services -->
+                <div class="form-section-title">Additional Services</div>
+                <div class="addon-list">
+                    <label class="addon-item">
+                        <input type="checkbox" id="airportPickup" />
+                        <i class="fas fa-shuttle-van"></i> Airport Pickup
+                        <span class="addon-cost">+₹4,200</span>
+                    </label>
+                    <label class="addon-item">
+                        <input type="checkbox" id="tourGuide" />
+                        <i class="fas fa-user-tie"></i> Tour Guide
+                        <span class="addon-cost">+₹8,400</span>
+                    </label>
+                    <label class="addon-item">
+                        <input type="checkbox" id="insurance" />
+                        <i class="fas fa-shield-alt"></i> Travel Insurance
+                        <span class="addon-cost">+₹6,300/person</span>
+                    </label>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="form-section-title">Payment Method</div>
+                <div class="payment-methods">
+                    <div class="pay-method active">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Credit Card</span>
+                    </div>
+                    <div class="pay-method">
+                        <i class="fab fa-paypal"></i>
+                        <span>PayPal</span>
+                    </div>
+                    <div class="pay-method">
+                        <i class="fas fa-university"></i>
+                        <span>Bank Transfer</span>
+                    </div>
+                </div>
+
+                <!-- Special Requests -->
+                <div class="form-section-title">Special Requests</div>
+                <div class="form-group">
+                    <label for="specialRequests">Any special requirements or requests?</label>
+                    <textarea id="specialRequests"
+                        placeholder="Dietary needs, accessibility requirements, celebrations…"></textarea>
+                </div>
+
+                <button type="submit" class="btn-confirm">
+                    <i class="fas fa-check-circle"></i> Confirm Booking
+                </button>
+
+            </form>
+        </div><!-- /.form-card -->
+
+        <!-- RIGHT: Trip Summary Sidebar (US#8) -->
+        <div class="summary-card">
+            <div class="summary-img-wrap">
+                <img id="summImg" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80"
+                    alt="Destination" loading="lazy" />
+                <span class="summary-img-label" id="summDest">Select a destination</span>
+            </div>
+            <div class="summary-body">
+                <h3><i class="fas fa-receipt"></i> Trip Summary</h3>
+
+                <div class="summary-row">
+                    <span class="label"><i class="fas fa-calendar-alt"></i> Travel Date</span>
+                    <span class="value" id="summDate">—</span>
+                </div>
+                <div class="summary-row">
+                    <span class="label"><i class="fas fa-users"></i> Travellers</span>
+                    <span class="value" id="summTravelers">1</span>
+                </div>
+                <div class="summary-row">
+                    <span class="label"><i class="fas fa-bed"></i> Room Type</span>
+                    <span class="value" id="summRoom">Standard</span>
+                </div>
+                <div class="summary-row">
+                    <span class="label">Base Price</span>
+                    <span class="value" id="summBase">₹ 1,49,999.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="label">Add-on Services</span>
+                    <span class="value" id="summAddons">₹ 0.00</span>
+                </div>
+                <div class="summary-total">
+                    <span class="t-label">Total Amount</span>
+                    <span class="t-val" id="summTotal">₹ 1,49,999.00</span>
+                </div>
+
+                <div class="trust-badges">
+                    <div class="trust-badge"><i class="fas fa-lock"></i> Secure &amp; encrypted payment</div>
+                    <div class="trust-badge"><i class="fas fa-check-circle"></i> No hidden fees</div>
+                    <div class="trust-badge"><i class="fas fa-undo"></i> Free cancellation (48 hrs)</div>
+                </div>
+            </div>
+        </div><!-- /.summary-card -->
+
+    </div><!-- /.booking-layout -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Go Trip</h4>
+                <p>Your trusted travel partner since 1996 — crafting unforgettable journeys worldwide.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p><i class="fas fa-phone"></i> +91 9473452441</p>
+                <p style="margin-top:8px"><i class="fas fa-envelope"></i> info@gotrip.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GoTrip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-top" id="backTop"><i class="fas fa-chevron-up"></i></a>
+
+    <script src="js/book.js"></script>
+</body>
+
+</html>

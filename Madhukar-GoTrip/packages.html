@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Browse and search GoTrip travel packages – Europe, Asia, and the Americas." />
+    <title>Travel Packages | GoTrip</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/packages.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="container">
+            <a class="nav-logo" href="index.html">Go Trip</a>
+            <button class="hamburger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="packages.html" class="active">Packages</a></li>
+                <li><a href="book.html">Book a Trip</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <header class="page-hero">
+        <h1>Premium Travel Packages</h1>
+        <p>Handcrafted itineraries delivering unforgettable experiences around the globe</p>
+    </header>
+
+    <!-- ===== Search Bar (US#5) ===== -->
+    <div class="search-section">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="pkgSearch" placeholder="Search destinations, countries, packages…"
+                aria-label="Search packages" />
+            <i class="fas fa-times search-clear" id="searchClear" title="Clear search"></i>
+        </div>
+    </div>
+
+    <!-- Packages Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <small>Exclusive Offers</small>
+                <h2>Our Best Packages</h2>
+                <p>Choose from our carefully curated travel packages across Europe, Asia, and the Americas</p>
+            </div>
+
+            <!-- Filter Buttons (US#5) -->
+            <div class="filter-wrap">
+                <button class="filter-btn active" data-filter="all">All Packages</button>
+                <button class="filter-btn" data-filter="europe">Europe</button>
+                <button class="filter-btn" data-filter="asia">Asia</button>
+                <button class="filter-btn" data-filter="america">Americas</button>
+            </div>
+
+            <!-- No results msg -->
+            <div id="noResults" class="no-results">
+                <i class="fas fa-search"></i>
+                <p>No packages match your search. Try a different keyword or filter.</p>
+            </div>
+
+            <!-- Package Cards Grid (US#4 layout, US#5 search targets) -->
+            <div class="packages-grid">
+
+                <!-- Card 1: Switzerland -->
+                <div class="pkg-card" data-category="europe">
+                    <div class="pkg-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
+                            alt="Swiss Alps, Switzerland" loading="lazy" />
+                        <span class="pkg-badge">5 Days</span>
+                        <span class="pkg-price-tag">₹ 1,59,999</span>
+                    </div>
+                    <div class="pkg-body">
+                        <div class="pkg-header">
+                            <h3 class="pkg-card-title">Swiss Adventure</h3>
+                            <div class="pkg-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(120)</span>
+                            </div>
+                        </div>
+                        <div class="pkg-meta">
+                            <span class="pkg-location"><i class="fas fa-map-marker-alt"></i> Switzerland</span>
+                            <span><i class="fas fa-calendar-alt"></i> All year</span>
+                            <span><i class="fas fa-users"></i> Max 12</span>
+                        </div>
+                        <p class="pkg-desc">Experience the breathtaking Swiss Alps, serene lakes, and charming cities
+                            like Zurich and Lucerne. Perfect for nature lovers and adventure seekers.</p>
+                        <a href="book.html?package=swiss-adventure" class="btn-book-now">Book Now <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Paris -->
+                <div class="pkg-card" data-category="europe">
+                    <div class="pkg-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80"
+                            alt="Eiffel Tower, Paris" loading="lazy" />
+                        <span class="pkg-badge">4 Days</span>
+                        <span class="pkg-price-tag">₹ 1,49,999</span>
+                    </div>
+                    <div class="pkg-body">
+                        <div class="pkg-header">
+                            <h3 class="pkg-card-title">Paris Escapade</h3>
+                            <div class="pkg-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(98)</span>
+                            </div>
+                        </div>
+                        <div class="pkg-meta">
+                            <span class="pkg-location"><i class="fas fa-map-marker-alt"></i> Paris, France</span>
+                            <span><i class="fas fa-calendar-alt"></i> All year</span>
+                            <span><i class="fas fa-users"></i> Max 10</span>
+                        </div>
+                        <p class="pkg-desc">Discover the romance and charm of Paris — from the Eiffel Tower to the
+                            Louvre. Experience art, history, and cuisine at the heart of Europe.</p>
+                        <a href="book.html?package=paris-escapade" class="btn-book-now">Book Now <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Canada -->
+                <div class="pkg-card" data-category="america">
+                    <div class="pkg-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80"
+                            alt="Canadian Rockies, Canada" loading="lazy" />
+                        <span class="pkg-badge">5 Days</span>
+                        <span class="pkg-price-tag">₹ 1,99,999</span>
+                    </div>
+                    <div class="pkg-body">
+                        <div class="pkg-header">
+                            <h3 class="pkg-card-title">Canadian Rockies</h3>
+                            <div class="pkg-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(145)</span>
+                            </div>
+                        </div>
+                        <div class="pkg-meta">
+                            <span class="pkg-location"><i class="fas fa-map-marker-alt"></i> Canada</span>
+                            <span><i class="fas fa-calendar-alt"></i> May–Oct</span>
+                            <span><i class="fas fa-users"></i> Max 15</span>
+                        </div>
+                        <p class="pkg-desc">Journey through the stunning landscapes of the Canadian Rockies — hike, spot
+                            wildlife, and explore national parks like Banff and Jasper.</p>
+                        <a href="book.html?package=canadian-rockies" class="btn-book-now">Book Now <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 4: Tokyo -->
+                <div class="pkg-card" data-category="asia">
+                    <div class="pkg-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80"
+                            alt="Tokyo cityscape, Japan" loading="lazy" />
+                        <span class="pkg-badge">5 Days</span>
+                        <span class="pkg-price-tag">₹ 1,69,999</span>
+                    </div>
+                    <div class="pkg-body">
+                        <div class="pkg-header">
+                            <h3 class="pkg-card-title">Tokyo Explorer</h3>
+                            <div class="pkg-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(110)</span>
+                            </div>
+                        </div>
+                        <div class="pkg-meta">
+                            <span class="pkg-location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</span>
+                            <span><i class="fas fa-calendar-alt"></i> All year</span>
+                            <span><i class="fas fa-users"></i> Max 10</span>
+                        </div>
+                        <p class="pkg-desc">Discover the perfect blend of tradition and innovation in Tokyo — ancient
+                            temples, futuristic tech, delicious cuisine, and Mt. Fuji.</p>
+                        <a href="book.html?package=tokyo-explorer" class="btn-book-now">Book Now <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 5: Korea -->
+                <div class="pkg-card" data-category="asia">
+                    <div class="pkg-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=600&q=80"
+                            alt="Seoul, South Korea" loading="lazy" />
+                        <span class="pkg-badge">4 Days</span>
+                        <span class="pkg-price-tag">₹ 1,49,999</span>
+                    </div>
+                    <div class="pkg-body">
+                        <div class="pkg-header">
+                            <h3 class="pkg-card-title">Seoul Adventure</h3>
+                            <div class="pkg-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(87)</span>
+                            </div>
+                        </div>
+                        <div class="pkg-meta">
+                            <span class="pkg-location"><i class="fas fa-map-marker-alt"></i> Seoul, South Korea</span>
+                            <span><i class="fas fa-calendar-alt"></i> All year</span>
+                            <span><i class="fas fa-users"></i> Max 14</span>
+                        </div>
+                        <p class="pkg-desc">Explore the vibrant street markets, royal palaces, K-food scene, and
+                            futuristic Gangnam district in the dynamic capital of South Korea.</p>
+                        <a href="book.html?package=korea-adventure" class="btn-book-now">Book Now <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 6: Monaco -->
+                <div class="pkg-card" data-category="europe">
+                    <div class="pkg-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                            alt="Monaco harbour" loading="lazy" />
+                        <span class="pkg-badge">4 Days</span>
+                        <span class="pkg-price-tag">₹ 1,39,999</span>
+                    </div>
+                    <div class="pkg-body">
+                        <div class="pkg-header">
+                            <h3 class="pkg-card-title">Monaco Luxury</h3>
+                            <div class="pkg-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(74)</span>
+                            </div>
+                        </div>
+                        <div class="pkg-meta">
+                            <span class="pkg-location"><i class="fas fa-map-marker-alt"></i> Monaco, Monaco</span>
+                            <span><i class="fas fa-calendar-alt"></i> All year</span>
+                            <span><i class="fas fa-users"></i> Max 8</span>
+                        </div>
+                        <p class="pkg-desc">Indulge in the glamour of Monaco — the famous casino, Formula 1 circuit,
+                            luxury yachts, and spectacular Mediterranean coastline views.</p>
+                        <a href="book.html?package=monaco-luxury" class="btn-book-now">Book Now <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div><!-- /.packages-grid -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Go Trip</h4>
+                <p>Your trusted travel partner, creating unforgettable journeys and lifelong memories.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="book.html">Book a Trip</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i></p>
+                <p style="margin-top:8px"><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
+                <p style="margin-top:8px"><i class="fas fa-envelope"></i> info@gotrip.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GoTrip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-top" id="backTop"><i class="fas fa-chevron-up"></i></a>
+
+    <script src="js/packages.js"></script>
+</body>
+
+</html>
