@@ -187,14 +187,30 @@
         if (backBtn) backBtn.addEventListener('click', () => window.location.href = 'book.html');
     }
 
-    /* ---- Shared: hamburger + back-to-top ---- */
+    /* ---- Shared: hamburger + backdrop + back-to-top ---- */
     const burger = document.getElementById('burger');
     const menu = document.getElementById('navMenu');
+    const backdrop = document.getElementById('navBackdrop');
+
+    function openMenu() {
+        menu.classList.add('open');
+        burger.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        if (backdrop) backdrop.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        menu.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        if (backdrop) backdrop.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
     if (burger && menu) {
-        burger.addEventListener('click', () => {
-            burger.classList.toggle('open');
-            menu.classList.toggle('open');
-        });
+        burger.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+        if (backdrop) backdrop.addEventListener('click', closeMenu);
+        menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
     }
 
     const backTop = document.getElementById('backTop');

@@ -1,44 +1,65 @@
+<div align="center">
+
 # ✈️ Go Trip — Travel Agency Website
 
-> *Your trusted travel partner for unforgettable journeys worldwide.*
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-gotripagil.netlify.app-ff5f6d?style=for-the-badge&logoColor=white)](https://gotripagil.netlify.app/)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-A fully responsive, multi-page travel agency website built with pure **HTML**, **CSS**, and **JavaScript**. No frameworks, no build tools — just clean, modern front-end code.
+*Your trusted travel partner for unforgettable journeys worldwide.*
+
+**[🚀 View Live Site](https://gotripagil.netlify.app/)**
+
+</div>
 
 ---
 
-## 🌐 Pages
+## 📌 About
+
+**Go Trip** is a fully responsive, multi-page travel agency website built with pure **HTML5**, **CSS3**, and **Vanilla JavaScript** — no frameworks, no build tools. It features destination browsing, trip booking, login/sign up, and a booking confirmation summary page.
+
+---
+
+## 🌐 Live Demo
+
+> 🔗 **[https://gotripagil.netlify.app/](https://gotripagil.netlify.app/)**
+
+---
+
+## 📄 Pages
 
 | Page | File | Description |
 |------|------|-------------|
-| Home | `index.html` | Hero section, destination cards, about section & testimonials |
-| Packages | `packages.html` | Browse all travel packages with filters |
-| Book a Trip | `book.html` | Trip booking form with dynamic package details |
-| Sign Up / Login | `signup.html` | User registration and login |
-| Booking Summary | `summary.html` | Order confirmation & booking summary |
+| 🏠 Home | `index.html` | Hero search, destination cards, about & testimonials |
+| 📦 Packages | `packages.html` | Browse & filter all travel packages |
+| ✈️ Book a Trip | `book.html` | Booking form with live price summary sidebar |
+| 👤 Login / Sign Up | `signup.html` | Tabbed login & registration with validation |
+| ✅ Booking Summary | `summary.html` | Booking confirmation with reference number |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Madhukar-GoTrip/
-├── index.html          # Home page
-├── packages.html       # Travel packages listing
-├── book.html           # Booking form
-├── signup.html         # Sign up / Login
-├── summary.html        # Booking summary / confirmation
+Agil-Project/
+├── index.html            # Home page
+├── packages.html         # Packages listing & filter
+├── book.html             # Booking form
+├── signup.html           # Login + Sign Up (tabbed)
+├── summary.html          # Booking confirmation
 │
 ├── css/
-│   ├── style.css       # Global / shared styles (nav, footer, utilities)
-│   ├── index.css       # Home page styles
-│   ├── packages.css    # Packages page styles
-│   ├── book.css        # Booking form styles
-│   └── signup.css      # Sign up / login styles
+│   ├── style.css         # Global styles — nav, footer, responsive
+│   ├── index.css         # Home page styles
+│   ├── packages.css      # Packages page styles
+│   ├── book.css          # Booking form & summary styles
+│   └── signup.css        # Login / Sign Up styles
 │
 └── js/
-    ├── packages.js     # Package filtering & rendering logic
-    ├── book.js         # Booking form logic & validation
-    └── signup.js       # Sign up / login form handling
+    ├── packages.js       # Package search & category filter
+    ├── book.js           # Booking form logic & price calculator
+    └── signup.js         # Tab switcher, form validation
 ```
 
 ---
@@ -46,41 +67,45 @@ Madhukar-GoTrip/
 ## ✨ Features
 
 - 🗺️ **6 International Destinations** — Canada, Paris, Monaco, Switzerland, South Korea, Tokyo
-- 🔍 **Search & Book** — Destination search from the hero section links directly to the booking page
-- 📦 **Package Details** — URL query parameters pass the selected package across pages seamlessly
-- 📱 **Fully Responsive** — Mobile-friendly hamburger navigation and fluid grid layouts
-- 🎬 **Smooth Animations** — Powered by [AOS (Animate On Scroll)](https://michalsnik.github.io/aos/)
-- 👤 **Auth UI** — Sign up & login forms with client-side validation
-- ✅ **Booking Summary** — Confirmation page showing final booking details
+- 🔍 **Destination Search** — Hero search bar links straight to the booking page
+- 🏷️ **Package Filter** — Filter by All / Europe / Asia / Americas
+- 💰 **Live Price Calculator** — Booking sidebar updates total in real time
+- 👤 **Login + Sign Up Tabs** — Both forms on one page with smooth tab switching
+- 🔒 **Form Validation** — Real-time field errors and password strength meter
+- 📱 **Fully Responsive** — Mobile-first layout with smooth hamburger menu & backdrop overlay
+- 🎬 **Scroll Animations** — Powered by AOS (Animate On Scroll)
+- ✅ **Booking Confirmation** — Summary page with unique booking reference number
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology | Usage |
-|------------|-------|
+| Technology | Purpose |
+|------------|---------|
 | HTML5 | Semantic page structure |
-| CSS3 | Custom styling, animations, responsive layout |
-| JavaScript (ES6+) | DOM manipulation, form validation, URL params |
-| [AOS v2.3.4](https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js) | Scroll animations |
-| [Font Awesome v6.4.0](https://fontawesome.com/) | Icons throughout the site |
+| CSS3 | Custom styling, animations, responsive design |
+| JavaScript (ES6+) | DOM manipulation, form validation, dynamic pricing |
+| [AOS v2.3.4](https://michalsnik.github.io/aos/) | Scroll-triggered animations |
+| [Font Awesome v6.4.0](https://fontawesome.com/) | Icons |
 | [Google Fonts — Poppins & Satisfy](https://fonts.google.com/) | Typography |
+| [Unsplash](https://unsplash.com/) | Destination photography |
 
 ---
 
 ## 🚀 Getting Started
 
-No installation or build step required. Simply open the project in a browser:
-
-1. Clone or download the repository
-2. Open `index.html` in any modern browser
+No installation or build step required:
 
 ```bash
-# Using VS Code Live Server (recommended)
-# Right-click index.html → "Open with Live Server"
+# Clone the repository
+git clone https://github.com/mr-madhukar/Agil-Project.git
+
+# Open in browser
+# Right-click index.html → Open with Live Server (VS Code)
+# OR simply double-click index.html
 ```
 
-> **Note:** The project uses CDN links for AOS, Font Awesome, and Google Fonts, so an internet connection is required for full styling.
+> **Note:** CDN links are used for AOS, Font Awesome, and Google Fonts — an internet connection is needed for full styling.
 
 ---
 
@@ -107,7 +132,11 @@ No installation or build step required. Simply open the project in a browser:
 
 ---
 
-## 👨‍💻 Developer
+<div align="center">
 
-**Madhukar** — Built as part of the Agil Project  
+**Built by Madhukar** — Agil Project  
 © 2024 GoTrip. All rights reserved.
+
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20at-gotripagil.netlify.app-ff5f6d?style=flat-square)](https://gotripagil.netlify.app/)
+
+</div>

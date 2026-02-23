@@ -35,7 +35,7 @@
     <nav class="nav-bar">
         <div class="container">
             <a class="nav-logo" href="index.html">Go Trip</a>
-            <button class="hamburger" id="burger" aria-label="Toggle menu">
+            <button class="hamburger" id="burger" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -48,6 +48,7 @@
             </ul>
         </div>
     </nav>
+    <div class="nav-backdrop" id="navBackdrop"></div>
 
     <!-- ===== Banner / Hero Section ===== -->
     <header class="banner" id="home">
@@ -444,10 +445,26 @@
         // Mobile menu toggle
         const burger = document.getElementById('burger');
         const navMenu = document.getElementById('navMenu');
-        burger.addEventListener('click', () => {
-            navMenu.classList.toggle('open');
-            burger.classList.toggle('open');
-        });
+        const backdrop = document.getElementById('navBackdrop');
+
+        function openMenu() {
+            navMenu.classList.add('open');
+            burger.classList.add('open');
+            burger.setAttribute('aria-expanded', 'true');
+            backdrop.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            navMenu.classList.remove('open');
+            burger.classList.remove('open');
+            burger.setAttribute('aria-expanded', 'false');
+            backdrop.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        burger.addEventListener('click', () => navMenu.classList.contains('open') ? closeMenu() : openMenu());
+        backdrop.addEventListener('click', closeMenu);
+        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
         // Set minimum date to today
         const dateInput = document.getElementById('date');
