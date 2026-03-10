@@ -13,30 +13,84 @@
 
     let currentCategory = 'all';
     let currentQuery = '';
+    let allPackages = [];
+
+    const packagesGrid = document.getElementById('packagesGrid');
+
+    /* ---- Render packages ---- */
+    function renderPackages(packages) {
+        if (!packagesGrid) return;
+        packagesGrid.innerHTML = '';
+
+        if (packages.length === 0) {
+            noResults.classList.add('show');
+        } else {
+            noResults.classList.remove('show');
+            packages.forEach(pkg => {
+                // Ensure photo is valid, or put a placeholder
+                const img = pkg.image_url || `https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80`;
+                
+                const card = document.createElement('div');
+                card.className = 'pkg-card';
+                card.dataset.category = pkg.category.toLowerCase();
+
+                card.innerHTML = `
+                    <div class="pkg-img-wrap">
+                        <img src="${img}" alt="${pkg.destination}" loading="lazy" />
+                        <span class="pkg-badge">${pkg.duration}</span>
+                        <span class="pkg-price-tag">${pkg.price_inr}</span>
+                    </div>
+                    <div class="pkg-body">
+                        <div class="pkg-header">
+                            <h3 class="pkg-card-title">${pkg.destination}</h3>
+                            <div class="pkg-rating">
+                                <i class="fas fa-star" style="color:#ffc107"></i>
+                                <span>(${pkg.rating || 0})</span>
+                            </div>
+                        </div>
+                        <div class="pkg-meta">
+                            <span class="pkg-location"><i class="fas fa-map-marker-alt"></i> ${pkg.destination}</span>
+                        </div>
+                        <p class="pkg-desc">${pkg.description || 'Enjoy a wonderful trip to ' + pkg.destination}</p>
+                        <a href="book.html?package=${pkg.id}" class="btn-book-now">Book Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                `;
+                packagesGrid.appendChild(card);
+            });
+        }
+    }
+
+    /* ---- Fetch packages from API ---- */
+    async function fetchPackages() {
+        try {
+            const res = await fetch('http://localhost:5000/api/packages');
+            if (res.ok) {
+                allPackages = await res.json();
+                applyFilters();
+            } else {
+                packagesGrid.innerHTML = '<p>Failed to load packages.</p>';
+            }
+        } catch (err) {
+            console.error(err);
+            if(packagesGrid) packagesGrid.innerHTML = '<p>Network error loading packages.</p>';
+        }
+    }
 
     /* ---- Apply combined filter + search ---- */
     function applyFilters() {
-        let visibleCount = 0;
-
-        cards.forEach(card => {
-            const category = card.dataset.category || '';
-            const title = (card.querySelector('.pkg-card-title')?.textContent || '').toLowerCase();
-            const location = (card.querySelector('.pkg-location')?.textContent || '').toLowerCase();
-            const desc = (card.querySelector('.pkg-desc')?.textContent || '').toLowerCase();
-            const combined = title + ' ' + location + ' ' + desc;
+        const filtered = allPackages.filter(pkg => {
+            const category = (pkg.category || '').toLowerCase();
+            const title = (pkg.destination || '').toLowerCase();
+            const desc = (pkg.description || '').toLowerCase();
+            const combined = title + ' ' + desc;
 
             const matchCat = currentCategory === 'all' || category === currentCategory;
             const matchStr = currentQuery === '' || combined.includes(currentQuery);
 
-            if (matchCat && matchStr) {
-                card.classList.remove('hidden');
-                visibleCount++;
-            } else {
-                card.classList.add('hidden');
-            }
+            return matchCat && matchStr;
         });
 
-        noResults.classList.toggle('show', visibleCount === 0);
+        renderPackages(filtered);
     }
 
     /* ---- Search input ---- */
@@ -101,4 +155,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    // Initialize list
+    fetchPackages();
 })();

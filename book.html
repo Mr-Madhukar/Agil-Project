@@ -196,6 +196,39 @@
 
     </div><!-- /.booking-layout -->
 
+    <!-- ===== Reviews Section (NEW) ===== -->
+    <div class="booking-layout" style="margin-top: 40px;">
+        <div class="form-card" style="width: 100%;">
+            <h2><i class="fas fa-comments"></i> Package Reviews</h2>
+            
+            <div id="reviewsList" style="margin-bottom: 30px; margin-top: 20px;">
+                <p>Loading reviews...</p>
+            </div>
+
+            <div class="form-section-title">Leave a Review</div>
+            <form id="reviewForm" novalidate style="margin-top: 15px;">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="reviewRating">Rating <span class="required">*</span></label>
+                    <select id="reviewRating" required style="width: 150px;">
+                        <option value="5">5 - Excellent</option>
+                        <option value="4">4 - Good</option>
+                        <option value="3">3 - Average</option>
+                        <option value="2">2 - Poor</option>
+                        <option value="1">1 - Terrible</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="reviewComment">Comment</label>
+                    <textarea id="reviewComment" placeholder="Share your experience..." rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn-confirm" id="btnSubmitReview" style="width: auto; padding: 10px 20px;">
+                    <i class="fas fa-paper-plane"></i> Submit Review
+                </button>
+                <div id="reviewError" style="color: red; margin-top: 10px; display: none;"></div>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-grid">

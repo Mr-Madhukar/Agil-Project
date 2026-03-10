@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | GoTrip</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .admin-table th, .admin-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .admin-table th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .badge-admin { background: #e74c3c; color: white; }
+        .badge-traveler { background: #3498db; color: white; }
+        #errorMsg { color: red; text-align: center; }
+    </style>
+</head>
+
+<body>
+    <!-- Simple Nav -->
+    <nav class="navbar" style="background:#2c3e50;">
+        <div class="nav-brand">
+            <a href="index.html" style="color:white; text-decoration:none;">
+                <i class="fas fa-plane-departure"></i> Go Trip Admin
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="profile.html" style="color:white;">My Profile</a></li>
+            <li><a href="#" id="logoutBtn" style="color:white;">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h2><i class="fas fa-users-cog"></i> Registered Users</h2>
+        </div>
+        
+        <p id="errorMsg" style="display:none;"></p>
+
+        <div style="overflow-x:auto; margin-bottom: 50px;">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <tr><td colspan="5" style="text-align:center;">Loading users...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="admin-header">
+            <h2><i class="fas fa-suitcase"></i> All Platform Bookings</h2>
+        </div>
+        
+        <div style="overflow-x:auto;">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Destination</th>
+                        <th>Date</th>
+                        <th>Travelers</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="adminBookingsBody">
+                    <tr><td colspan="7" style="text-align:center;">Loading bookings...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

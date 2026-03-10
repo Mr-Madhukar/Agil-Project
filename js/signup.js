@@ -113,7 +113,7 @@
   });
 
   if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
+    loginForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       hideAlert('loginMsg');
 
@@ -121,9 +121,31 @@
       const results = fields.map(validateLoginField);
 
       if (results.every(Boolean)) {
-        // Simulate successful login (client-side demo)
-        loginForm.style.display    = 'none';
-        loginSuccess.style.display = 'block';
+        const payload = {
+          email: document.getElementById('loginEmail').value.trim(),
+          password: document.getElementById('loginPassword').value.trim()
+        };
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (response.ok) {
+                // Store token and user
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                loginForm.style.display    = 'none';
+                loginSuccess.style.display = 'block';
+                document.getElementById('loginSuccess').querySelector('h3').textContent = `Welcome Back, ${data.user.fullname}!`;
+            } else {
+                showAlert('loginMsg', 'error', data.error || 'Login failed.');
+            }
+        } catch(error) {
+            showAlert('loginMsg', 'error', 'Network error. Please try again later.');
+        }
       } else {
         showAlert('loginMsg', 'error', 'Please fix the errors above before submitting.');
       }
@@ -213,7 +235,7 @@
   });
 
   if (signupForm) {
-    signupForm.addEventListener('submit', function (e) {
+    signupForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       hideAlert('signupMsg');
 
@@ -227,8 +249,28 @@
       }
 
       if (results.every(Boolean)) {
-        signupForm.style.display    = 'none';
-        signupSuccess.style.display = 'block';
+        const payload = {
+            fullname: document.getElementById('fullname').value.trim(),
+            username: document.getElementById('username').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            password: document.getElementById('password').value.trim()
+        };
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (response.ok) {
+                signupForm.style.display    = 'none';
+                signupSuccess.style.display = 'block';
+            } else {
+                showAlert('signupMsg', 'error', data.error || 'Registration failed.');
+            }
+        } catch(error) {
+            showAlert('signupMsg', 'error', 'Network error. Please try again later.');
+        }
       } else {
         showAlert('signupMsg', 'error', 'Please fix the errors above before submitting.');
       }

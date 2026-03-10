@@ -124,29 +124,170 @@
         });
 
         // Form submit → save to localStorage → go to summary
-        bookForm.addEventListener('submit', function (e) {
+        bookForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            const data = {
-                ref: 'GT' + Math.floor(100000 + Math.random() * 900000),
-                name: document.getElementById('fullName')?.value || '',
-                email: document.getElementById('email')?.value || '',
-                phone: document.getElementById('phone')?.value || '',
-                destination: document.getElementById('destination')?.value || '',
-                date: document.getElementById('travelDate')?.value || '',
-                travelers: document.getElementById('travelers')?.value || '1',
-                roomType: document.getElementById('roomType')?.value || 'standard',
-                requests: document.getElementById('specialRequests')?.value || '',
-                total: document.getElementById('summTotal')?.textContent || '₹ 0.00',
-                payment: (document.querySelector('.pay-method.active span')?.textContent) || 'Credit Card',
-            };
+            
+            const token = localStorage.getItem('token');
+            if(!token) {
+                alert('Please log in to book a package.');
+                window.location.href = 'signup.html?tab=login';
+                return;
+            }
 
-            // Store in sessionStorage so summary.html can read it
-            sessionStorage.setItem('bookingData', JSON.stringify(data));
-            window.location.href = 'summary.html';
+            const destination = document.getElementById('destination')?.value || '';
+            const travelDate = document.getElementById('travelDate')?.value || '';
+            const travelers = parseInt(document.getElementById('travelers')?.value) || 1;
+            
+            // Map destination name back to a package ID (temp hack for static form)
+            const destToId = {
+                'Paris, France': 2,
+                'Tokyo, Japan': 4,
+                'Bern, Switzerland': 1,
+                'Vancouver, Canada': 3,
+                'Seoul, South Korea': 5,
+                'Monaco, Monaco': 6
+            };
+            const packageId = destToId[destination] || 1;
+
+            try {
+                const res = await fetch('http://localhost:5000/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth-token': token
+                    },
+                    body: JSON.stringify({
+                        package_id: packageId,
+                        travel_date: travelDate,
+                        travelers: travelers
+                    })
+                });
+
+                if (res.ok) {
+                    const result = await res.json();
+                    
+                    const data = {
+                        ref: 'GT' + result.bookingId,
+                        name: document.getElementById('fullName')?.value || '',
+                        email: document.getElementById('email')?.value || '',
+                        phone: document.getElementById('phone')?.value || '',
+                        destination: destination,
+                        date: travelDate,
+                        travelers: travelers,
+                        roomType: document.getElementById('roomType')?.value || 'standard',
+                        requests: document.getElementById('specialRequests')?.value || '',
+                        total: document.getElementById('summTotal')?.textContent || '₹ 0.00',
+                        payment: (document.querySelector('.pay-method.active span')?.textContent) || 'Credit Card',
+                    };
+
+                    sessionStorage.setItem('bookingData', JSON.stringify(data));
+                    window.location.href = 'summary.html';
+                } else {
+                    const err = await res.json();
+                    alert('Booking failed: ' + (err.error || 'Unknown error'));
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Network error during booking.');
+            }
         });
+
+        // Reviews Logic
+        const destToIdRev = {
+            'Paris, France': 2,
+            'Tokyo, Japan': 4,
+            'Bern, Switzerland': 1,
+            'Vancouver, Canada': 3,
+            'Seoul, South Korea': 5,
+            'Monaco, Monaco': 6
+        };
+
+        async function fetchReviews() {
+            const dest = document.getElementById('destination')?.value;
+            const packageId = destToIdRev[dest] || 1;
+            const reviewsList = document.getElementById('reviewsList');
+            
+            if(!reviewsList) return;
+            
+            try {
+                const res = await fetch(`http://localhost:5000/api/packages/${packageId}/reviews`);
+                if(res.ok) {
+                    const reviews = await res.json();
+                    reviewsList.innerHTML = '';
+                    if(reviews.length === 0) {
+                        reviewsList.innerHTML = '<p>No reviews yet. Be the first to review!</p>';
+                    } else {
+                        reviews.forEach(r => {
+                            let stars = '';
+                            for(let i=0; i<5; i++) {
+                                stars += `<i class="fas fa-star" style="color: ${i < r.rating ? '#ffc107' : '#e4e5e9'};"></i>`;
+                            }
+                            reviewsList.innerHTML += `
+                                <div style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                                    <strong><i class="fas fa-user-circle"></i> ${r.fullname}</strong>
+                                    <div style="margin: 5px 0;">${stars}</div>
+                                    <p style="margin: 0; color: #555;">${r.comment}</p>
+                                    <small style="color: #999;">${new Date(r.created_at).toLocaleDateString()}</small>
+                                </div>
+                            `;
+                        });
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+                reviewsList.innerHTML = '<p>Failed to load reviews.</p>';
+            }
+        }
+
+        const reviewForm = document.getElementById('reviewForm');
+        if(reviewForm) {
+            reviewForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+                if(!token) {
+                    alert('You must be logged in to leave a review.');
+                    return;
+                }
+
+                const dest = document.getElementById('destination')?.value;
+                const packageId = destToIdRev[dest] || 1;
+                const rating = parseInt(document.getElementById('reviewRating').value);
+                const comment = document.getElementById('reviewComment').value;
+                const errorDiv = document.getElementById('reviewError');
+
+                try {
+                    const res = await fetch(`http://localhost:5000/api/packages/${packageId}/reviews`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-auth-token': token
+                        },
+                        body: JSON.stringify({ rating, comment })
+                    });
+
+                    if(res.ok) {
+                        document.getElementById('reviewComment').value = '';
+                        errorDiv.style.display = 'none';
+                        fetchReviews();
+                    } else {
+                        const err = await res.json();
+                        errorDiv.textContent = err.error || 'Failed to submit review.';
+                        errorDiv.style.display = 'block';
+                    }
+                } catch(err) {
+                    console.error(err);
+                    errorDiv.textContent = 'Network error.';
+                    errorDiv.style.display = 'block';
+                }
+            });
+        }
+
+        // Fetch reviews on load and when destination changes
+        document.getElementById('destination')?.addEventListener('change', fetchReviews);
 
         parseUrl();
         updateSummary();
+        fetchReviews();
     }
 
     /* =====================================================
