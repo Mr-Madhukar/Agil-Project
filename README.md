@@ -94,18 +94,41 @@ Agil-Project/
 
 ## 🚀 Getting Started
 
-No installation or build step required:
+To run the project locally, you need to start the backend server:
 
 ```bash
 # Clone the repository
 git clone https://github.com/mr-madhukar/Agil-Project.git
 
-# Open in browser
-# Right-click index.html → Open with Live Server (VS Code)
-# OR simply double-click index.html
+# Install dependencies
+npm install
+
+# Seed the database (run once)
+node seed-users.js
+
+# Start the server
+npm start
+# OR for development with auto-reload
+npm run dev
 ```
 
+The server will start on `http://localhost:5000`. Navigate to this URL in your browser.
+
 > **Note:** CDN links are used for AOS, Font Awesome, and Google Fonts — an internet connection is needed for full styling.
+
+---
+
+## 🔑 Test Credentials
+
+You can test the features using the following pre-configured accounts:
+
+**Standard User (Traveler)**
+- Email: `testuser123@example.com`
+- Password: `Password123!`
+
+**Admin User**
+- Email: `admin@gotrip.com`
+- Password: `admin123`
 
 ---
 
