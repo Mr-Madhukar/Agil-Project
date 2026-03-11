@@ -51,18 +51,19 @@
 </head>
 
 <body>
-    <!-- Simple Nav -->
-    <nav class="navbar" style="background:#2c3e50;">
-        <div class="nav-brand">
-            <a href="index.html" style="color:white; text-decoration:none;">
-                <i class="fas fa-plane-departure"></i> Go Trip Admin
+    <!-- Navigation -->
+    <nav class="nav-bar" style="background:#2c3e50;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <a class="nav-logo" href="index.html" style="color:white; text-decoration:none; font-size: 24px; font-weight: 700;">
+                <i class="fas fa-plane-departure"></i> Go Trip
             </a>
+            <ul class="nav-menu" id="navMenu" style="display: flex; list-style: none; margin: 0; padding: 0;">
+                <!-- Navigation items dynamically loaded by auth-nav.js -->
+            </ul>
         </div>
-        <ul class="nav-links">
-            <li><a href="profile.html" style="color:white;">My Profile</a></li>
-            <li><a href="#" id="logoutBtn" style="color:white;">Logout</a></li>
-        </ul>
     </nav>
+    <div class="nav-backdrop" id="navBackdrop"></div>
+    <script src="js/auth-nav.js"></script>
 
     <div class="admin-container">
         <div class="admin-header">
