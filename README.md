@@ -17,7 +17,7 @@
 
 ## 📌 About
 
-**Go Trip** is a fully responsive, multi-page travel agency website built with pure **HTML5**, **CSS3**, and **Vanilla JavaScript** — no frameworks, no build tools. It features destination browsing, trip booking, login/sign up, and a booking confirmation summary page.
+**Go Trip** is a comprehensive travel agency website featuring a responsive, dynamic frontend built with **HTML5**, **CSS3**, and **Vanilla JavaScript**, powered by a robust **Node.js/Express.js backend** and **SQLite** database. It features dynamic navigation based on user authentication (admin vs. regular user), destination browsing, live trip booking price calculation, and a full booking management system.
 
 ---
 
@@ -25,72 +25,8 @@
 
 > 🔗 **[https://gotripagil.netlify.app/](https://gotripagil.netlify.app/)**
 
----
 
-## 📄 Pages
 
-| Page | File | Description |
-|------|------|-------------|
-| 🏠 Home | `index.html` | Hero search, destination cards, about & testimonials |
-| 📦 Packages | `packages.html` | Browse & filter all travel packages |
-| ✈️ Book a Trip | `book.html` | Booking form with live price summary sidebar |
-| 👤 Login / Sign Up | `signup.html` | Tabbed login & registration with validation |
-| ✅ Booking Summary | `summary.html` | Booking confirmation with reference number |
-
----
-
-## 📁 Project Structure
-
-```
-Agil-Project/
-├── index.html            # Home page
-├── packages.html         # Packages listing & filter
-├── book.html             # Booking form
-├── signup.html           # Login + Sign Up (tabbed)
-├── summary.html          # Booking confirmation
-│
-├── css/
-│   ├── style.css         # Global styles — nav, footer, responsive
-│   ├── index.css         # Home page styles
-│   ├── packages.css      # Packages page styles
-│   ├── book.css          # Booking form & summary styles
-│   └── signup.css        # Login / Sign Up styles
-│
-└── js/
-    ├── packages.js       # Package search & category filter
-    ├── book.js           # Booking form logic & price calculator
-    └── signup.js         # Tab switcher, form validation
-```
-
----
-
-## ✨ Features
-
-- 🗺️ **6 International Destinations** — Canada, Paris, Monaco, Switzerland, South Korea, Tokyo
-- 🔍 **Destination Search** — Hero search bar links straight to the booking page
-- 🏷️ **Package Filter** — Filter by All / Europe / Asia / Americas
-- 💰 **Live Price Calculator** — Booking sidebar updates total in real time
-- 👤 **Login + Sign Up Tabs** — Both forms on one page with smooth tab switching
-- 🔒 **Form Validation** — Real-time field errors and password strength meter
-- 📱 **Fully Responsive** — Mobile-first layout with smooth hamburger menu & backdrop overlay
-- 🎬 **Scroll Animations** — Powered by AOS (Animate On Scroll)
-- ✅ **Booking Confirmation** — Summary page with unique booking reference number
-
----
-
-## 🛠️ Tech Stack
-
-| Technology | Purpose |
-|------------|---------|
-| HTML5 | Semantic page structure |
-| CSS3 | Custom styling, animations, responsive design |
-| JavaScript (ES6+) | DOM manipulation, form validation, dynamic pricing |
-| [AOS v2.3.4](https://michalsnik.github.io/aos/) | Scroll-triggered animations |
-| [Font Awesome v6.4.0](https://fontawesome.com/) | Icons |
-| [Google Fonts — Poppins & Satisfy](https://fonts.google.com/) | Typography |
-| [Unsplash](https://unsplash.com/) | Destination photography |
-
----
 
 ## 🚀 Getting Started
 
@@ -130,20 +66,7 @@ You can test the features using the following pre-configured accounts:
 - Email: `admin@gotrip.com`
 - Password: `admin123`
 
----
 
-## 🗺️ Destinations & Pricing
-
-| Destination | Duration | Price (INR) | Price (USD) | Rating |
-|-------------|----------|-------------|-------------|--------|
-| 🍁 Canada | 5 Days | ₹1,99,999 | $2,382 | ⭐ 4.9 |
-| 🗼 Paris | 4 Days | ₹1,49,999 | $1,786 | ⭐ 4.8 |
-| 🎰 Monaco | 4 Days | ₹1,39,999 | $1,667 | ⭐ 4.7 |
-| 🏔️ Switzerland | 5 Days | ₹1,59,999 | $1,906 | ⭐ 4.9 |
-| 🌸 South Korea | 4 Days | ₹1,49,999 | $1,787 | ⭐ 4.8 |
-| 🗾 Tokyo | 5 Days | ₹1,69,999 | $2,024 | ⭐ 4.9 |
-
----
 
 ## 📬 Contact
 
