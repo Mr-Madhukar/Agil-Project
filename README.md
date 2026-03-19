@@ -6,6 +6,7 @@
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
 *Your trusted travel partner for unforgettable journeys worldwide.*
 
@@ -17,7 +18,9 @@
 
 ## 📌 About
 
-**Go Trip** is a comprehensive travel agency website featuring a responsive, dynamic frontend built with **HTML5**, **CSS3**, and **Vanilla JavaScript**, powered by a robust **Node.js/Express.js backend** and **SQLite** database. It features dynamic navigation based on user authentication (admin vs. regular user), destination browsing, live trip booking price calculation, and a full booking management system.
+**Go Trip** is a comprehensive travel agency website featuring a responsive, dynamic frontend built with **HTML5**, **CSS3**, and **Vanilla JavaScript**, powered by a robust **Node.js/Express.js backend** and **MongoDB** database (via Mongoose). It features dynamic navigation based on user authentication (admin vs. regular user), destination browsing, live trip booking price calculation, and a full booking management system.
+
+*(Note: The database was recently migrated from SQLite to MongoDB to fully support persistent live-hosting on platforms like Render.com!)*
 
 ---
 
@@ -26,47 +29,42 @@
 > 🔗 **[https://gotripagil.netlify.app/](https://gotripagil.netlify.app/)**
 
 
-
-
 ## 🚀 Getting Started
 
-To run the project locally, you need to start the backend server:
+To run the project locally, you need to configure your database and start the backend server:
 
 ```bash
 # Clone the repository
 git clone https://github.com/mr-madhukar/Agil-Project.git
 
-# Install dependencies
+# Install dependencies (Mongoose, Express, etc.)
 npm install
 
-# Seed the database (run once)
-node seed-users.js
+# Configure MongoDB Environment Variables (CRITICAL!)
+# 1. Open the project and copy the `.env.example` file to a new file named `.env`.
+# 2. Paste your live MongoDB Atlas connection URL into the `MONGODB_URI` variable.
 
 # Start the server
 npm start
 # OR for development with auto-reload
 npm run dev
+
+# Run automated Jest testing suite
+npm test
 ```
 
-The server will start on `http://localhost:5000`. Navigate to this URL in your browser.
+The server will start on `http://localhost:5000` (assuming your MongoDB connected successfully). Navigate to this URL in your browser to view the application!
 
-> **Note:** CDN links are used for AOS, Font Awesome, and Google Fonts — an internet connection is needed for full styling.
+> **Note:** Travel packages are seeded automatically into your MongoDB cluster upon the first successful connection.
 
 ---
 
-## 🔑 Test Credentials
+## 🔑 Accounts
 
-You can test the features using the following pre-configured accounts:
+Since this template uses real MongoDB clusters, earlier default testing accounts have been wiped.
+Simply click **Sing Up** on the frontend to create your own Traveler account, or register an agent account directly in the database to test the Admin dashboard!
 
-**Standard User (Traveler)**
-- Email: `testuser123@example.com`
-- Password: `Password123!`
-
-**Admin User**
-- Email: `admin@gotrip.com`
-- Password: `admin123`
-
-
+---
 
 ## 📬 Contact
 
