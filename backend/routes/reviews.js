@@ -1,33 +1,31 @@
 const express = require('express');
-const db = require('../config/database');
+const Review = require('../models/Review');
 const authMiddleware = require('../middleware/auth');
 
-const router = express.Router({ mergeParams: true }); // mergeParams allows accessing /api/packages/:packageId/reviews
+const router = express.Router({ mergeParams: true });
 
-// @route   GET /api/packages/:packageId/reviews
-// @desc    Get all reviews for a package
-// @access  Public
-router.get('/', (req, res) => {
-    const query = `
-        SELECT r.id, r.rating, r.comment, r.created_at, u.fullname, u.username
-        FROM reviews r
-        JOIN users u ON r.user_id = u.id
-        WHERE r.package_id = ?
-        ORDER BY r.created_at DESC
-    `;
+router.get('/', async (req, res) => {
+    try {
+        const reviews = await Review.find({ package_id: req.params.packageId })
+            .populate('user_id', 'fullname username')
+            .sort({ created_at: -1 });
 
-    db.all(query, [req.params.packageId], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ error: 'Database error fetching reviews' });
-        }
-        res.status(200).json(rows);
-    });
+        const mappedReviews = reviews.map(r => ({
+            id: r.id,
+            rating: r.rating,
+            comment: r.comment,
+            created_at: r.created_at,
+            fullname: r.user_id ? r.user_id.fullname : 'Unknown',
+            username: r.user_id ? r.user_id.username : 'Unknown'
+        }));
+
+        res.status(200).json(mappedReviews);
+    } catch (err) {
+        res.status(500).json({ error: 'Database error fetching reviews' });
+    }
 });
 
-// @route   POST /api/packages/:packageId/reviews
-// @desc    Add a review for a package
-// @access  Private
-router.post('/', authMiddleware, (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
     const { rating, comment } = req.body;
     const user_id = req.user.id;
     const package_id = req.params.packageId;
@@ -36,19 +34,13 @@ router.post('/', authMiddleware, (req, res) => {
         return res.status(400).json({ error: 'Rating between 1 and 5 is required' });
     }
 
-    // Optional: Check if user actually booked this package before letting them review (Business logic)
-    // For now, we just let them review if they are logged in.
-
-    db.run(
-        'INSERT INTO reviews (package_id, user_id, rating, comment) VALUES (?, ?, ?, ?)',
-        [package_id, user_id, rating, comment || ''],
-        function(err) {
-            if (err) {
-                return res.status(500).json({ error: 'Database error creating review' });
-            }
-            res.status(201).json({ message: 'Review added successfully', reviewId: this.lastID });
-        }
-    );
+    try {
+        const review = new Review({ package_id, user_id, rating, comment: comment || '' });
+        await review.save();
+        res.status(201).json({ message: 'Review added successfully', reviewId: review.id });
+    } catch (err) {
+        res.status(500).json({ error: 'Database error creating review' });
+    }
 });
 
 module.exports = router;

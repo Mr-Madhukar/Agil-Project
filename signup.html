@@ -117,7 +117,7 @@
                         <div class="input-wrap">
                             <i class="icon fas fa-user"></i>
                             <input type="text" id="fullname" name="fullname" placeholder="Your full name"
-                                autocomplete="name" />
+                                autocomplete="name" minlength="3" maxlength="20" />
                         </div>
                         <span class="field-error" id="fullnameErr"></span>
                     </div>
@@ -128,7 +128,7 @@
                         <div class="input-wrap">
                             <i class="icon fas fa-id-badge"></i>
                             <input type="text" id="username" name="username" placeholder="Choose a username"
-                                autocomplete="username" />
+                                autocomplete="username" minlength="3" maxlength="20" />
                         </div>
                         <span class="field-error" id="usernameErr"></span>
                     </div>
@@ -139,7 +139,7 @@
                         <div class="input-wrap">
                             <i class="icon fas fa-envelope"></i>
                             <input type="email" id="email" name="email" placeholder="you@example.com"
-                                autocomplete="email" />
+                                autocomplete="email" maxlength="20" />
                         </div>
                         <span class="field-error" id="emailErr"></span>
                     </div>

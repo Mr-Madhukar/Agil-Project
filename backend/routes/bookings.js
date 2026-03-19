@@ -1,13 +1,10 @@
 const express = require('express');
-const db = require('../config/database');
+const Booking = require('../models/Booking');
 const authMiddleware = require('../middleware/auth');
 
 const router = express.Router();
 
-// @route   POST /api/bookings
-// @desc    Create a new booking
-// @access  Private
-router.post('/', authMiddleware, (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
     const { package_id, travel_date, travelers } = req.body;
     const user_id = req.user.id;
 
@@ -15,62 +12,57 @@ router.post('/', authMiddleware, (req, res) => {
         return res.status(400).json({ error: 'Package ID and Travel Date are required' });
     }
 
-    db.run(
-        'INSERT INTO bookings (user_id, package_id, travel_date, travelers) VALUES (?, ?, ?, ?)',
-        [user_id, package_id, travel_date, travelers || 1],
-        function(err) {
-            if (err) {
-                return res.status(500).json({ error: 'Database error creating booking' });
-            }
-            res.status(201).json({ message: 'Booking created successfully', bookingId: this.lastID });
-        }
-    );
+    try {
+        const booking = new Booking({ user_id, package_id, travel_date, travelers: travelers || 1 });
+        await booking.save();
+        res.status(201).json({ message: 'Booking created successfully', bookingId: booking.id });
+    } catch (err) {
+        res.status(500).json({ error: 'Database error creating booking' });
+    }
 });
 
-// @route   GET /api/bookings/user/:id
-// @desc    Get all bookings for a user
-// @access  Private
-router.get('/user/:id', authMiddleware, (req, res) => {
-    // Only the user themselves or an admin can access this
-    if (req.user.id !== parseInt(req.params.id) && req.user.role !== 'admin') {
+router.get('/user/:id', authMiddleware, async (req, res) => {
+    if (req.user.id !== req.params.id && req.user.role !== 'admin') {
         return res.status(403).json({ error: 'Unauthorized' });
     }
 
-    const query = `
-        SELECT b.id, b.travel_date, b.travelers, b.status, b.booking_date, 
-               p.destination, p.duration, p.price_inr
-        FROM bookings b
-        JOIN packages p ON b.package_id = p.id
-        WHERE b.user_id = ?
-        ORDER BY b.booking_date DESC
-    `;
+    try {
+        const bookings = await Booking.find({ user_id: req.params.id })
+            .populate('package_id', 'destination duration price_inr')
+            .sort({ booking_date: -1 });
 
-    db.all(query, [req.params.id], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ error: 'Database error fetching bookings' });
-        }
-        res.status(200).json(rows);
-    });
+        const mappedBookings = bookings.map(b => ({
+            id: b.id,
+            travel_date: b.travel_date,
+            travelers: b.travelers,
+            status: b.status,
+            booking_date: b.booking_date,
+            destination: b.package_id ? b.package_id.destination : 'Unknown',
+            duration: b.package_id ? b.package_id.duration : 'Unknown',
+            price_inr: b.package_id ? b.package_id.price_inr : '0'
+        }));
+
+        res.status(200).json(mappedBookings);
+    } catch (err) {
+        res.status(500).json({ error: 'Database error fetching bookings' });
+    }
 });
 
-// @route   PUT /api/bookings/:id/cancel
-// @desc    Cancel a booking
-// @access  Private
-router.put('/:id/cancel', authMiddleware, (req, res) => {
-    // Need to verify if the booking belongs to the current user (or if admin)
-    db.get('SELECT user_id FROM bookings WHERE id = ?', [req.params.id], (err, booking) => {
-        if (err) return res.status(500).json({ error: 'Database error' });
+router.put('/:id/cancel', authMiddleware, async (req, res) => {
+    try {
+        const booking = await Booking.findById(req.params.id);
         if (!booking) return res.status(404).json({ error: 'Booking not found' });
 
-        if (booking.user_id !== req.user.id && req.user.role !== 'admin') {
+        if (booking.user_id.toString() !== req.user.id && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized to cancel this booking' });
         }
 
-        db.run('UPDATE bookings SET status = "Cancelled" WHERE id = ?', [req.params.id], function(err) {
-            if (err) return res.status(500).json({ error: 'Failed to cancel booking' });
-            res.status(200).json({ message: 'Booking cancelled successfully' });
-        });
-    });
+        booking.status = 'Cancelled';
+        await booking.save();
+        res.status(200).json({ message: 'Booking cancelled successfully' });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to cancel booking' });
+    }
 });
 
 module.exports = router;

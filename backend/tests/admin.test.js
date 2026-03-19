@@ -1,6 +1,8 @@
 const request = require('supertest');
 const app = require('../app');
 const db = require('../config/database');
+const mongoose = require('mongoose');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 let adminToken;
@@ -8,43 +10,24 @@ let userToken;
 
 beforeAll(async () => {
     process.env.NODE_ENV = 'test';
-    
-    // Ensure clean state
-    await new Promise((resolve) => db.run("DELETE FROM users", resolve));
+    await mongoose.connection.asPromise();
+    await db.clearDatabase();
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash('password123', salt);
     
-    // Seed an admin
-    await new Promise((resolve) => {
-        db.run(
-            'INSERT INTO users (fullname, username, email, password_hash, role) VALUES (?, ?, ?, ?, ?)',
-            ['Admin User', 'admin', 'admin@example.com', hashedPassword, 'admin'],
-            resolve
-        );
-    });
+    await User.create({ fullname: 'Admin User', username: 'admin', email: 'admin@example.com', password_hash: hashedPassword, role: 'admin' });
+    await User.create({ fullname: 'Normal User', username: 'normal', email: 'normal@example.com', password_hash: hashedPassword, role: 'traveler' });
 
-    // Seed a normal user
-    await new Promise((resolve) => {
-        db.run(
-            'INSERT INTO users (fullname, username, email, password_hash, role) VALUES (?, ?, ?, ?, ?)',
-            ['Normal User', 'normal', 'normal@example.com', hashedPassword, 'traveler'],
-            resolve
-        );
-    });
-
-    // Login Admin
     const adminRes = await request(app).post('/api/auth/login').send({ email: 'admin@example.com', password: 'password123' });
     adminToken = adminRes.body.token;
 
-    // Login Normal User
     const userRes = await request(app).post('/api/auth/login').send({ email: 'normal@example.com', password: 'password123' });
     userToken = userRes.body.token;
 });
 
-afterAll((done) => {
-    db.close();
-    done();
+afterAll(async () => {
+    await db.closeDatabase();
 });
 
 describe('Admin API', () => {
@@ -55,9 +38,7 @@ describe('Admin API', () => {
             
         expect(res.statusCode).toEqual(200);
         expect(Array.isArray(res.body)).toBeTruthy();
-        expect(res.body.length).toBeGreaterThanOrEqual(2); // admin + normal user
-        
-        // Ensure password hashes are not sent
+        expect(res.body.length).toBeGreaterThanOrEqual(2);
         expect(res.body[0]).not.toHaveProperty('password_hash');
     });
 

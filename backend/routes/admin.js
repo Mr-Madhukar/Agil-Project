@@ -1,10 +1,10 @@
 const express = require('express');
-const db = require('../config/database');
+const User = require('../models/User');
+const Booking = require('../models/Booking');
 const authMiddleware = require('../middleware/auth');
 
 const router = express.Router();
 
-// Middleware to check if user is admin
 const adminAuth = (req, res, next) => {
     if (req.user && req.user.role === 'admin') {
         next();
@@ -13,37 +13,39 @@ const adminAuth = (req, res, next) => {
     }
 };
 
-// @route   GET /api/admin/users
-// @desc    Get all users
-// @access  Private/Admin
-router.get('/users', [authMiddleware, adminAuth], (req, res) => {
-    db.all('SELECT id, fullname, username, email, role FROM users', [], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ error: 'Database error fetching users' });
-        }
-        res.status(200).json(rows);
-    });
+router.get('/users', [authMiddleware, adminAuth], async (req, res) => {
+    try {
+        const users = await User.find().select('fullname username email role');
+        res.status(200).json(users);
+    } catch (err) {
+        res.status(500).json({ error: 'Database error fetching users' });
+    }
 });
 
-// @route   GET /api/admin/bookings
-// @desc    Get all bookings globally
-// @access  Private/Admin
-router.get('/bookings', [authMiddleware, adminAuth], (req, res) => {
-    const query = `
-        SELECT b.id, b.travel_date, b.travelers, b.status, b.booking_date, 
-               p.destination, p.price_inr, u.fullname as user_fullname, u.email as user_email
-        FROM bookings b
-        JOIN packages p ON b.package_id = p.id
-        JOIN users u ON b.user_id = u.id
-        ORDER BY b.booking_date DESC
-    `;
+router.get('/bookings', [authMiddleware, adminAuth], async (req, res) => {
+    try {
+        const bookings = await Booking.find()
+            .populate('package_id', 'destination price_inr')
+            .populate('user_id', 'fullname email')
+            .sort({ booking_date: -1 });
 
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ error: 'Database error fetching bookings' });
-        }
-        res.status(200).json(rows);
-    });
+        // Map Mongoose output to match SQL JOIN structure
+        const mappedBookings = bookings.map(b => ({
+            id: b.id,
+            travel_date: b.travel_date,
+            travelers: b.travelers,
+            status: b.status,
+            booking_date: b.booking_date,
+            destination: b.package_id ? b.package_id.destination : 'Unknown',
+            price_inr: b.package_id ? b.package_id.price_inr : '0',
+            user_fullname: b.user_id ? b.user_id.fullname : 'Unknown',
+            user_email: b.user_id ? b.user_id.email : 'Unknown'
+        }));
+
+        res.status(200).json(mappedBookings);
+    } catch (err) {
+        res.status(500).json({ error: 'Database error fetching bookings' });
+    }
 });
 
 module.exports = router;

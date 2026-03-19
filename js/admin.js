@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const errorMsg = document.getElementById('errorMsg');
 
     try {
-        const response = await fetch('http://localhost:5000/api/admin/users', {
+        const response = await fetch('/api/admin/users', {
             headers: {
                 'x-auth-token': token
             }
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const bookingsBody = document.getElementById('adminBookingsBody');
     try {
-        const responseList = await fetch('http://localhost:5000/api/admin/bookings', {
+        const responseList = await fetch('/api/admin/bookings', {
             headers: { 'x-auth-token': token }
         });
         if(responseList.ok) {

@@ -150,7 +150,7 @@
             const packageId = destToId[destination] || 1;
 
             try {
-                const res = await fetch('http://localhost:5000/api/bookings', {
+                const res = await fetch('/api/bookings', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -210,7 +210,7 @@
             if(!reviewsList) return;
             
             try {
-                const res = await fetch(`http://localhost:5000/api/packages/${packageId}/reviews`);
+                const res = await fetch(`/api/packages/${packageId}/reviews`);
                 if(res.ok) {
                     const reviews = await res.json();
                     reviewsList.innerHTML = '';
@@ -256,7 +256,7 @@
                 const errorDiv = document.getElementById('reviewError');
 
                 try {
-                    const res = await fetch(`http://localhost:5000/api/packages/${packageId}/reviews`, {
+                    const res = await fetch(`/api/packages/${packageId}/reviews`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

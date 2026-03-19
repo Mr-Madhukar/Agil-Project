@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Environment Variables & Secrets (CRITICAL: Do not push to public repos)
+.env
+.env.*
+!.env.example
+
+# Legacy SQLite Database (Do not push local test data)
+backend/config/database.sqlite
+*.db
+*.sqlite
+*.sqlite3
+
+# Test Coverage
+coverage/
+.nyc_output/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo

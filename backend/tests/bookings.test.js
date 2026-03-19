@@ -1,6 +1,9 @@
 const request = require('supertest');
 const app = require('../app');
 const db = require('../config/database');
+const mongoose = require('mongoose');
+const User = require('../models/User');
+const Package = require('../models/Package');
 const bcrypt = require('bcryptjs');
 
 let userToken;
@@ -9,47 +12,24 @@ let packageId;
 
 beforeAll(async () => {
     process.env.NODE_ENV = 'test';
-    
-    // Clean tables
-    await new Promise((resolve) => db.run("DELETE FROM bookings", resolve));
-    await new Promise((resolve) => db.run("DELETE FROM packages", resolve));
-    await new Promise((resolve) => db.run("DELETE FROM users", resolve));
+    await mongoose.connection.asPromise();
+    await db.clearDatabase();
 
-    // Seed User
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash('password123', salt);
     
-    await new Promise((resolve) => {
-        db.run(
-            'INSERT INTO users (fullname, username, email, password_hash) VALUES (?, ?, ?, ?)',
-            ['Booking Tester', 'booktest', 'book@example.com', hashedPassword],
-            function(err) {
-                userId = this.lastID;
-                resolve();
-            }
-        );
-    });
+    const user = await User.create({ fullname: 'Booking Tester', username: 'booktest', email: 'book@example.com', password_hash: hashedPassword });
+    userId = user.id;
 
-    // Seed Package
-    await new Promise((resolve) => {
-        db.run(
-            'INSERT INTO packages (destination, duration, price_inr, price_usd, rating) VALUES (?, ?, ?, ?, ?)',
-            ['Test Dest', '3 Days', '100', '1', 5],
-            function(err) {
-                packageId = this.lastID;
-                resolve();
-            }
-        );
-    });
+    const pkg = await Package.create({ destination: 'Test Dest', duration: '3 Days', price_inr: '100', price_usd: '1', rating: 5 });
+    packageId = pkg.id;
 
-    // Login User
     const res = await request(app).post('/api/auth/login').send({ email: 'book@example.com', password: 'password123' });
     userToken = res.body.token;
 });
 
-afterAll((done) => {
-    db.close();
-    done();
+afterAll(async () => {
+    await db.closeDatabase();
 });
 
 describe('Bookings API', () => {
@@ -89,7 +69,6 @@ describe('Bookings API', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('message');
 
-        // Verify it was cancelled
         const historyRes = await request(app)
             .get(`/api/bookings/user/${userId}`)
             .set('x-auth-token', userToken);

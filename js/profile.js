@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userObj = JSON.parse(userStr);
     
     try {
-        const response = await fetch(`http://localhost:5000/api/profile/${userObj.id}`, {
+        const response = await fetch(`/api/profile/${userObj.id}`, {
             headers: {
                 'x-auth-token': token
             }
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function fetchBookings(userId, token) {
         const tbody = document.getElementById('bookingsTableBody');
         try {
-            const res = await fetch(`http://localhost:5000/api/bookings/user/${userId}`, {
+            const res = await fetch(`/api/bookings/user/${userId}`, {
                 headers: { 'x-auth-token': token }
             });
             if (res.ok) {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.cancelBooking = async function(bookingId) {
         if (!confirm('Are you sure you want to cancel this booking?')) return;
         try {
-            const res = await fetch(`http://localhost:5000/api/bookings/${bookingId}/cancel`, {
+            const res = await fetch(`/api/bookings/${bookingId}/cancel`, {
                 method: 'PUT',
                 headers: { 'x-auth-token': token }
             });

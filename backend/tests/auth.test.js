@@ -1,19 +1,16 @@
 const request = require('supertest');
 const app = require('../app');
 const db = require('../config/database');
+const mongoose = require('mongoose');
 
-beforeAll((done) => {
+beforeAll(async () => {
     process.env.NODE_ENV = 'test';
-    
-    // Ensure clean state
-    db.serialize(() => {
-        db.run("DELETE FROM users", done);
-    });
+    await mongoose.connection.asPromise();
+    await db.clearDatabase();
 });
 
-afterAll((done) => {
-    db.close();
-    done();
+afterAll(async () => {
+    await db.closeDatabase();
 });
 
 describe('Auth API', () => {
@@ -37,7 +34,7 @@ describe('Auth API', () => {
             .send({
                 fullname: 'John Doe 2',
                 username: 'johndoe2',
-                email: 'john@example.com', // same email
+                email: 'john@example.com', 
                 password: 'password123'
             });
             

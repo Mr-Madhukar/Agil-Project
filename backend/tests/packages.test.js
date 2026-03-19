@@ -1,26 +1,19 @@
 const request = require('supertest');
 const app = require('../app');
 const db = require('../config/database');
+const mongoose = require('mongoose');
+const Package = require('../models/Package');
 
 beforeAll(async () => {
     process.env.NODE_ENV = 'test';
-    
-    // Clean packages
-    await new Promise((resolve) => db.run("DELETE FROM packages", resolve));
+    await mongoose.connection.asPromise();
+    await db.clearDatabase();
 
-    // Seed one package for tests
-    await new Promise((resolve) => {
-        db.run(
-            'INSERT INTO packages (destination, duration, price_inr, price_usd, rating, category) VALUES (?, ?, ?, ?, ?, ?)',
-            ['Test Destination', '3 Days', '₹50,000', '$600', 4.5, 'TestCategory'],
-            resolve
-        );
-    });
+    await Package.create({ destination: 'Test Destination', duration: '3 Days', price_inr: '₹50,000', price_usd: '$600', rating: 4.5, category: 'TestCategory' });
 });
 
-afterAll((done) => {
-    db.close();
-    done();
+afterAll(async () => {
+    await db.closeDatabase();
 });
 
 describe('Packages API', () => {

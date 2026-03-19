@@ -126,7 +126,7 @@
           password: document.getElementById('loginPassword').value.trim()
         };
         try {
-            const response = await fetch('http://localhost:5000/api/auth/login', {
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -197,6 +197,8 @@
       case 'fullname':
         if (!val) { showError(el, errEl, 'Full name is required.'); return false; }
         if (val.length < 3) { showError(el, errEl, 'Must be at least 3 characters.'); return false; }
+        if (val.length > 20) { showError(el, errEl, 'Must be less than 20 characters.'); return false; }
+        if (!/^[a-zA-Z\s]+$/.test(val)) { showError(el, errEl, 'Full name can only contain letters and spaces.'); return false; }
         break;
       case 'username':
         if (!val) { showError(el, errEl, 'Username is required.'); return false; }
@@ -205,6 +207,7 @@
       case 'email':
         if (!val) { showError(el, errEl, 'Email address is required.'); return false; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { showError(el, errEl, 'Enter a valid email address.'); return false; }
+        if (val.length > 20) { showError(el, errEl, 'Must be less than 20 characters.'); return false; }
         break;
       case 'password':
         if (!val) { showError(el, errEl, 'Password is required.'); return false; }
@@ -256,7 +259,7 @@
             password: document.getElementById('password').value.trim()
         };
         try {
-            const response = await fetch('http://localhost:5000/api/auth/register', {
+            const response = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

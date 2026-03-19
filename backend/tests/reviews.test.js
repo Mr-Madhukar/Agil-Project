@@ -1,6 +1,9 @@
 const request = require('supertest');
 const app = require('../app');
 const db = require('../config/database');
+const mongoose = require('mongoose');
+const User = require('../models/User');
+const Package = require('../models/Package');
 const bcrypt = require('bcryptjs');
 
 let userToken;
@@ -9,51 +12,27 @@ let packageId;
 
 beforeAll(async () => {
     process.env.NODE_ENV = 'test';
-    
-    // Clean tables
-    await new Promise((resolve) => db.run("DELETE FROM reviews", resolve));
-    await new Promise((resolve) => db.run("DELETE FROM packages", resolve));
-    await new Promise((resolve) => db.run("DELETE FROM users", resolve));
+    await mongoose.connection.asPromise();
+    await db.clearDatabase();
 
-    // Seed User
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash('password123', salt);
     
-    await new Promise((resolve) => {
-        db.run(
-            'INSERT INTO users (fullname, username, email, password_hash) VALUES (?, ?, ?, ?)',
-            ['Review Tester', 'revtest', 'rev@example.com', hashedPassword],
-            function(err) {
-                userId = this.lastID;
-                resolve();
-            }
-        );
-    });
+    const user = await User.create({ fullname: 'Review Tester', username: 'revtest', email: 'rev@example.com', password_hash: hashedPassword });
+    userId = user.id;
 
-    // Seed Package
-    await new Promise((resolve) => {
-        db.run(
-            'INSERT INTO packages (destination, duration, price_inr, price_usd, rating) VALUES (?, ?, ?, ?, ?)',
-            ['Review Dest', '3 Days', '100', '1', 5],
-            function(err) {
-                packageId = this.lastID;
-                resolve();
-            }
-        );
-    });
+    const pkg = await Package.create({ destination: 'Review Dest', duration: '3 Days', price_inr: '100', price_usd: '1', rating: 5 });
+    packageId = pkg.id;
 
-    // Login User
     const res = await request(app).post('/api/auth/login').send({ email: 'rev@example.com', password: 'password123' });
     userToken = res.body.token;
 });
 
-afterAll((done) => {
-    db.close();
-    done();
+afterAll(async () => {
+    await db.closeDatabase();
 });
 
 describe('Reviews API', () => {
-
     it('should create a new review', async () => {
         const res = await request(app)
             .post(`/api/packages/${packageId}/reviews`)
@@ -87,6 +66,6 @@ describe('Reviews API', () => {
         expect(res.body.length).toEqual(1);
         expect(res.body[0].rating).toEqual(4);
         expect(res.body[0].comment).toEqual('Great trip!');
-        expect(res.body[0].fullname).toEqual('Review Tester'); // Check join works
+        expect(res.body[0].fullname).toEqual('Review Tester'); 
     });
 });

@@ -63,7 +63,7 @@
     /* ---- Fetch packages from API ---- */
     async function fetchPackages() {
         try {
-            const res = await fetch('http://localhost:5000/api/packages');
+            const res = await fetch('/api/packages');
             if (res.ok) {
                 allPackages = await res.json();
                 applyFilters();

@@ -1,15 +1,15 @@
 const request = require('supertest');
 const app = require('../app');
 const db = require('../config/database');
+const mongoose = require('mongoose');
 
-// Ensure tests use an isolated in-memory db logic
-beforeAll(() => {
+beforeAll(async () => {
     process.env.NODE_ENV = 'test';
+    await mongoose.connection.asPromise();
 });
 
-afterAll((done) => {
-    db.close();
-    done();
+afterAll(async () => {
+    await db.closeDatabase();
 });
 
 describe('Sprint 0: Setup and Health Check', () => {
