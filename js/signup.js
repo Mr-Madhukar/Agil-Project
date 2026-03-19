@@ -207,7 +207,7 @@
       case 'email':
         if (!val) { showError(el, errEl, 'Email address is required.'); return false; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { showError(el, errEl, 'Enter a valid email address.'); return false; }
-        if (val.length > 20) { showError(el, errEl, 'Must be less than 20 characters.'); return false; }
+        if (val.length > 40) { showError(el, errEl, 'Must be less than 40 characters.'); return false; }
         break;
       case 'password':
         if (!val) { showError(el, errEl, 'Password is required.'); return false; }
